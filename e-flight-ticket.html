@@ -3,202 +3,195 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Ticket Receipt & Itenary - Borderless Travel</title>
+    <title>E-Ticket Receipt & Itinerary - Borderless Travel</title>
     <style>
-      * {
+      /* Reset styles */
+      body,
+      table,
+      td,
+      th,
+      p,
+      div,
+      span {
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
       }
 
+      /* Email client specific styles */
       body {
-        font-family: Arial, sans-serif;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
         background-color: #f5f5f5;
-        margin: 0;
-        padding: 20px;
       }
 
+      table {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+      }
+
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Main container */
       .email-container {
         max-width: 600px;
         margin: 0 auto;
-        background-color: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        font-family: Arial, sans-serif;
       }
 
-      .header {
-        height: 50px;
-      }
-
+      /* Header styles */
       .header-img {
+        width: 100%;
+        height: 50px;
+        object-fit: cover;
+      }
+
+      /* Ticket header */
+      .ticket-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333333;
+        padding: 20px;
+      }
+
+      .qr-code {
+        width: 100px;
+        height: 30px;
+        padding: 20px;
+      }
+
+      .qr-code img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
 
-      .logo {
-        color: #ffd60a;
-        font-size: 20px;
-        font-weight: bold;
-      }
-
-      .website {
-        color: white;
-        font-size: 12px;
-      }
-
-      .ticket-header {
-        padding: 20px;
-        border-bottom: 2px solid #00000040;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-      .ticket-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-      }
-
-      .qr-code {
-        flex: 1;
-        max-width: 120px;
-        height: 30px;
-      }
-
+      /* Section headers */
       .section-header {
         background-color: #660476;
-        color: white;
-        padding: 12px 20px;
+        color: #ffffff;
         font-weight: bold;
         font-size: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        margin-bottom: 15px;
+        padding: 12px 20px;
+      }
+
+      .section-header-2 {
+        background-color: #660476;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 16px 0;
       }
 
       .section-header-img {
         width: 18px;
         height: 18px;
+        margin-right: 8px;
+        vertical-align: middle;
         object-fit: contain;
       }
 
-      .section-content {
-        padding: 20px;
-      }
-
-      .light-purple-bg {
-        background-color: #f3ebfa;
-        margin-bottom: 20px;
-      }
-
-      .form-row {
-        display: flex;
-        gap: 20px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-      }
-
-      .form-group {
-        flex: 1;
-      }
-
-      .border-x {
-        border-right: 1px solid #00000040;
-        border-left: 1px solid #00000040;
-        padding: 0 15px;
-      }
-
-      .border-y {
-        border-top: 1px solid #00000040;
-        border-bottom: 1px solid #00000040;
-        padding: 15px 0;
-      }
-
+      /* Form elements */
       .form-label {
         font-size: 12px;
-        color: #666;
+        color: #666666;
         margin-bottom: 5px;
         display: block;
       }
 
       .form-input {
-        width: 100%;
         padding: 8px 12px;
-        border: 1px solid #66047640;
+        border: 1px solid rgba(102, 4, 118, 0.25);
         border-radius: 4px;
         font-size: 14px;
-      }
-
-      .flight-route {
-        border: 2px dashed #7b2d8e;
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 3px;
         background-color: #ffffff;
       }
 
-      .departure,
-      .arrival {
-        text-align: center;
+      /* Flight route */
+      .flight-route {
+        border: 2px dashed #7b2d8e;
+        border-radius: 8px;
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 20px 0;
       }
 
-      .time {
+      .flight-time {
         font-size: 14px;
         font-weight: bold;
-        color: #333;
-      }
-
-      .airport-code {
-        font-size: 14px;
-        color: #666;
-        margin: 5px 0;
+        color: #333333;
       }
 
       .airport-name {
         font-size: 12px;
-        color: #999;
+        color: #999999;
+        line-height: 1.3;
       }
 
       .flight-arrow {
-        font-size: 24px;
-        color: #7b2d8e;
+        text-align: center;
+        vertical-align: middle;
       }
 
-      .class-info {
-        text-align: right;
+      .flight-arrow img {
+        width: 18px;
+        height: 18px;
       }
 
-      .class-label {
-        font-size: 12px;
-        color: #666;
+      /* Light purple background */
+      .light-purple-bg {
+        background-color: #f3ebfa;
+        margin: 20px 0;
       }
 
-      .class-value {
-        font-weight: bold;
-        color: #333;
+      /* Borders */
+      .border-top {
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
       }
 
+      .border-bottom {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      }
+
+      .border-left {
+        border-left: 1px solid rgba(0, 0, 0, 0.25);
+      }
+
+      .border-right {
+        border-right: 1px solid rgba(0, 0, 0, 0.25);
+      }
+
+      /* Page number */
       .page-number {
+        background: linear-gradient(to right, #660476, #040876);
+        color: #ffffff;
+        font-weight: bold;
         text-align: center;
         padding: 10px;
-        background-image: linear-gradient(to right, #660476, #040876);
-        color: white;
-        font-weight: bold;
-        margin-bottom: 20px;
       }
 
+      /* Rules list */
       .rules-list {
         font-size: 12px;
         line-height: 1.6;
         color: #717171;
+        padding: 20px;
       }
 
       .rules-list ol {
@@ -209,12 +202,13 @@
         margin-bottom: 10px;
       }
 
+      /* Contact info */
       .contact-info {
         background-color: #f9f9f9;
-        padding: 15px 20px;
-        text-align: center;
         font-size: 12px;
-        color: #666;
+        color: #666666;
+        text-align: center;
+        padding: 15px 20px;
       }
 
       .highlight {
@@ -222,257 +216,424 @@
         font-weight: bold;
       }
 
-      @media (max-width: 600px) {
-        .form-row {
-          flex-direction: column;
-          gap: 10px;
+      /* Responsive styles */
+      @media screen and (max-width: 600px) {
+        .email-container {
+          width: 100% !important;
+          max-width: 100% !important;
         }
 
-        .flight-route {
-          flex-direction: column;
-          gap: 15px;
+        .ticket-title {
+          font-size: 20px !important;
         }
 
-        .flight-arrow {
-          transform: rotate(90deg);
+        .form-input {
+          font-size: 12px !important;
         }
       }
     </style>
   </head>
   <body>
-    <div class="email-container">
-      <!-- Header -->
-      <div class="header">
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185011/Frame_2147224331_f4uq2b.png"
-          class="header-img"
-        />
-      </div>
-
-      <!-- Ticket Header -->
-      <div class="ticket-header">
-        <h1 class="ticket-title">E-Ticket Receipt & Itenary</h1>
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185195/image_985_ru7zae.png"
-          class="qr-code"
-        />
-      </div>
-
-      <!-- Booking Information -->
-      <div class="section-header">
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185053/Vector_zuboak.png"
-          class="section-header-img"
-        />
-        Booking Information
-      </div>
-      <div class="section-content">
-        <div class="form-group">
-          <label class="form-label">Traveler(s) Name</label>
-          <input type="text" class="form-input" value="Name" readonly />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Booking ID</label>
-            <input type="text" class="form-input" value="Name" readonly />
-          </div>
-          <div class="form-group">
-            <label class="form-label">PNR</label>
-            <input type="text" class="form-input" value="Name" readonly />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Date of Issue</label>
-            <input type="text" class="form-input" value="Name" readonly />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Flight Meal</label>
-            <input
-              type="text"
-              class="form-input"
-              value="LOS - PHC (Not Disclosed)"
-              readonly
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Price Breakdown</label>
-            <input
-              type="text"
-              class="form-input"
-              value="Total Cost - ₦ 0.00"
-              readonly
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- Flight Information -->
-      <div class="section-header">
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185085/Vector_1_of1clh.png"
-          class="section-header-img"
-        />
-        Flight Information
-      </div>
-      <div class="section-content light-purple-bg">
-        <div class="form-row border-y">
-          <div class="form-group">
-            <label class="form-label">Airline Ref</label>
-            <div style="font-weight: bold">ADA059803</div>
-          </div>
-          <div class="form-group border-x">
-            <label class="form-label">Travel Date</label>
-            <div style="color: #ed6300; font-weight: bold">
-              Wednesday, Sept 4, 2025
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Total Duration</label>
-            <div>0h 0m</div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Luggage</label>
-          </div>
-          <div class="form-group border-x">
-            <label class="form-label">Check-in</label>
-            <div>20kg x 1</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Carry-on</label>
-            <div>7kg x 1</div>
-          </div>
-        </div>
-
-        <div class="flight-route">
-          <div class="departure">
-            <div class="time">16:15 Lagos (LOS)</div>
-            <div class="airport-name">
-              Murtala Muhammed<br />International Airport
-            </div>
-          </div>
-
-          <div class="flight-arrow">
-            <img
-              src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185118/Vector_2_oj5af7.png"
-              style="width: 18px; height: 18px"
-            />
-          </div>
-
-          <div class="arrival">
-            <div class="time">17:45 Port Harcourt (PHC)</div>
-            <div class="airport-name">Port Harcourt International Airport</div>
-          </div>
-
-          <div class="arrival">
-            <div class="time">Economy (K)</div>
-            <div class="airport-name">Class</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="page-number">1</div>
-
-      <!-- Page 2 Header -->
-      <div class="header">
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185011/Frame_2147224331_f4uq2b.png"
-          class="header-img"
-        />
-      </div>
-
-      <!-- General Rules & Conditions -->
-      <div class="section-header" style="margin-top: 20px">
-        <img
-          src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185167/Vector_3_l0ejz7.png"
-          class="section-header-img"
-        />
-        General Rules & Conditions
-      </div>
-      <div class="section-content">
-        <div class="rules-list">
-          <ol>
-            <li>
-              <strong>Be Early for your Flight:</strong> Please arrive at the
-              airport no later than two hours before your scheduled departure.
-              This ensures enough time for check-in, security, and boarding.
-            </li>
-
-            <li>
-              <strong>No Show Policy:</strong> If you fail to board your flight
-              without notifying the airline in advance, your ticket will be
-              marked as a No Show. This may penalize and render your ticket
-              invalid for future travel.
-            </li>
-
-            <li>
-              <strong>Name Changes are Not Permitted:</strong> Ticket names are
-              strictly non-transferable. Under no condition can a passenger's
-              name be altered once the ticket has been issued.
-            </li>
-
-            <li>
-              <strong>Baggage Allowance:</strong> All passengers must strictly
-              adhere to baggage guidelines regarding weight and size
-              restrictions. Any excess baggage will attract extra fees at the
-              airport.
-            </li>
-
-            <li>
-              <strong>Ticket Usage Sequence:</strong> Your ticket must be used
-              in the exact order of the segments stated. Skipping the first leg
-              of your journey will automatically void all the remaining
-              portions.
-            </li>
-
-            <li>
-              <strong>Destination Entry Requirements:</strong> Ensure you meet
-              all health and safety protocols at your destination, including
-              required vaccinations, testing, or quarantine measures. It is the
-              traveler's responsibility to stay informed.
-            </li>
-
-            <li>
-              <strong>Check Passport Validity:</strong> Verify that your
-              passport is valid for at least six months from your travel date
-              and has sufficient blank pages for immigration stamps.
-            </li>
-
-            <li>
-              <strong>Visa & Entry Documents:</strong> You are responsible for
-              obtaining the correct visa or entry documentation required for
-              your travel destination. Boarding may be denied without proper
-              documents.
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="contact-info">
-        <p>
-          <strong
-            >Have a Pleasant Trip. Borderless Travels wishes you a smooth and
-            enjoyable journey.</strong
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      bgcolor="#f5f5f5"
+    >
+      <tr>
+        <td align="center">
+          <table
+            class="email-container"
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            border="0"
+            bgcolor="#ffffff"
           >
-        </p>
-        <p><strong>Travel safe and thank you for choosing us!</strong></p>
-        <br />
-        <p>
-          At <span class="highlight">Borderless Travels</span>, you're always at
-          the heart of everything we do. Your satisfaction is our top priority.
-          If you experience any issues or need assistance at any point, please
-          don't hesitate to reach out to our customer support team. You can call
-          us on <span class="highlight">0201 330 3328</span> or email
-          <span class="highlight">support@borderless.travel</span>
-        </p>
-      </div>
+            <!-- Header -->
+            <tr>
+              <td>
+                <img
+                  src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185011/Frame_2147224331_f4uq2b.png"
+                  class="header-img"
+                  alt="Borderless Travel Header"
+                />
+              </td>
+            </tr>
 
-      <div class="page-number">2</div>
-    </div>
+            <!-- Ticket Header -->
+            <tr>
+              <td style="border-bottom: 2px solid rgba(0, 0, 0, 0.25)">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td wid class="ticket-title">
+                      E-Ticket Receipt & Itinerary
+                    </td>
+                    <td align="right" class="qr-code">
+                      <img
+                        src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185195/image_985_ru7zae.png"
+                        alt="QR Code"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Booking Information Section Header -->
+            <tr>
+              <td>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr align="center">
+                    <td class="section-header-2" width="40%" align="right">
+                      <img
+                        src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185053/Vector_zuboak.png"
+                        class="section-header-img"
+                        alt="Booking Icon"
+                      />
+                    </td>
+                    <td class="section-header-2" width="60%" align="left">
+                      Booking Information
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Booking Information Content -->
+            <tr>
+              <td style="padding: 20px">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <!-- Traveler Name -->
+                  <tr>
+                    <td style="padding-bottom: 20px">
+                      <div>
+                        <div class="form-label">Traveler(s) Name</div>
+                        <div class="form-input">Name</div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <!-- Row 1: Booking ID, PNR, Date -->
+                  <tr>
+                    <td>
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                      >
+                        <tr>
+                          <td
+                            width="33%"
+                            style="padding-right: 10px; padding-bottom: 20px"
+                          >
+                            <div class="form-label">Booking ID</div>
+                            <div class="form-input">Name</div>
+                          </td>
+                          <td
+                            width="33%"
+                            style="padding: 0 5px; padding-bottom: 20px"
+                          >
+                            <div class="form-label">PNR</div>
+                            <div class="form-input">Name</div>
+                          </td>
+                          <td
+                            width="33%"
+                            style="padding-left: 10px; padding-bottom: 20px"
+                          >
+                            <div class="form-label">Date of Issue</div>
+                            <div class="form-input">Name</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <!-- Row 2: Flight Meal, Price -->
+                  <tr>
+                    <td>
+                      <table
+                        width="100%"
+                        cellpadding="0"
+                        cellspacing="0"
+                        border="0"
+                      >
+                        <tr>
+                          <td width="50%" style="padding-right: 10px">
+                            <div class="form-label">Flight Meal</div>
+                            <div class="form-input">
+                              LOS - PHC (Not Disclosed)
+                            </div>
+                          </td>
+                          <td width="50%" style="padding-left: 10px">
+                            <div class="form-label">Price Breakdown</div>
+                            <div class="form-input">Total Cost - ₦ 0.00</div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Flight Information Section Header -->
+            <tr>
+              <td>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr align="center">
+                    <td class="section-header-2" width="40%" align="right">
+                      <img
+                        src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185085/Vector_1_of1clh.png"
+                        class="section-header-img"
+                        alt="Flight Icon"
+                      />
+                    </td>
+                    <td class="section-header-2" width="60%" align="left">
+                      Flight Information
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Flight Information Content -->
+            <tr>
+              <td class="light-purple-bg" style="padding: 20px">
+                <!-- Flight Details Row -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  class="border-top border-bottom"
+                  style="margin-bottom: 20px"
+                >
+                  <tr>
+                    <td width="33%" style="padding: 15px 10px">
+                      <div class="form-label">Airline Ref</div>
+                      <div style="font-weight: bold">ADA059803</div>
+                    </td>
+                    <td
+                      width="33%"
+                      class="border-left border-right"
+                      style="padding: 15px 10px"
+                    >
+                      <div class="form-label">Travel Date</div>
+                      <div style="color: #ed6300; font-weight: bold">
+                        Wednesday, Sept 4, 2025
+                      </div>
+                    </td>
+                    <td width="33%" style="padding: 15px 10px">
+                      <div class="form-label">Total Duration</div>
+                      <div>0h 0m</div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Luggage Row -->
+                <table
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                  border="0"
+                  style="margin-bottom: 20px"
+                >
+                  <tr>
+                    <td width="33%">
+                      <div
+                        style="
+                          color: #040876;
+                          font-weight: 600;
+                          font-size: 16px;
+                        "
+                        class="form-label"
+                      >
+                        Luggage
+                      </div>
+                    </td>
+                    <td
+                      width="33%"
+                      class="border-left border-right"
+                      style="padding: 0 15px"
+                    >
+                      <div class="form-label">Check-in</div>
+                      <div>20kg x 1</div>
+                    </td>
+                    <td width="33%" style="padding: 0 15px">
+                      <div class="form-label">Carry-on</div>
+                      <div>7kg x 1</div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Flight Route -->
+                <table
+                  class="flight-route"
+                  width="100%"
+                  cellpadding="20"
+                  cellspacing="0"
+                  border="0"
+                >
+                  <tr>
+                    <td width="35%" align="center" style="padding: 20px 0">
+                      <div class="flight-time">16:15 Lagos (LOS)</div>
+                      <div class="airport-name">
+                        Murtala Muhammed<br />International Airport
+                      </div>
+                    </td>
+                    <td width="5%" class="flight-arrow">
+                      <img
+                        src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185118/Vector_2_oj5af7.png"
+                        alt="Flight Arrow"
+                      />
+                    </td>
+                    <td width="35%" align="center" style="padding: 20px 0">
+                      <div class="flight-time">17:45 Port Harcourt (PHC)</div>
+                      <div class="airport-name">
+                        Port Harcourt International Airport
+                      </div>
+                    </td>
+                    <td width="25%" align="center" style="padding: 20px 0">
+                      <div class="flight-time">Economy (K)</div>
+                      <div class="airport-name">Class</div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Page Number -->
+            <tr>
+              <td class="page-number">1</td>
+            </tr>
+
+            <!-- Page 2 Header -->
+            <tr>
+              <td style="padding-top: 20px">
+                <img
+                  src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185011/Frame_2147224331_f4uq2b.png"
+                  class="header-img"
+                  alt="Borderless Travel Header"
+                />
+              </td>
+            </tr>
+
+            <!-- Rules Section Header -->
+            <tr>
+              <td>
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr align="center">
+                    <td class="section-header-2" width="40%" align="right">
+                      <img
+                        src="https://res.cloudinary.com/dwimctmdd/image/upload/v1755185167/Vector_3_l0ejz7.png"
+                        class="section-header-img"
+                        alt="Rules Icon"
+                      />
+                    </td>
+                    <td class="section-header-2" width="60%" align="left">
+                      General Rules & Conditions
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Rules Content -->
+            <tr>
+              <td class="rules-list">
+                <ol>
+                  <li>
+                    <strong>Be Early for your Flight:</strong> Please arrive at
+                    the airport no later than two hours before your scheduled
+                    departure. This ensures enough time for check-in, security,
+                    and boarding.
+                  </li>
+                  <li>
+                    <strong>No Show Policy:</strong> If you fail to board your
+                    flight without notifying the airline in advance, your ticket
+                    will be marked as a No Show. This may penalize and render
+                    your ticket invalid for future travel.
+                  </li>
+                  <li>
+                    <strong>Name Changes are Not Permitted:</strong> Ticket
+                    names are strictly non-transferable. Under no condition can
+                    a passenger's name be altered once the ticket has been
+                    issued.
+                  </li>
+                  <li>
+                    <strong>Baggage Allowance:</strong> All passengers must
+                    strictly adhere to baggage guidelines regarding weight and
+                    size restrictions. Any excess baggage will attract extra
+                    fees at the airport.
+                  </li>
+                  <li>
+                    <strong>Ticket Usage Sequence:</strong> Your ticket must be
+                    used in the exact order of the segments stated. Skipping the
+                    first leg of your journey will automatically void all the
+                    remaining portions.
+                  </li>
+                  <li>
+                    <strong>Destination Entry Requirements:</strong> Ensure you
+                    meet all health and safety protocols at your destination,
+                    including required vaccinations, testing, or quarantine
+                    measures. It is the traveler's responsibility to stay
+                    informed.
+                  </li>
+                  <li>
+                    <strong>Check Passport Validity:</strong> Verify that your
+                    passport is valid for at least six months from your travel
+                    date and has sufficient blank pages for immigration stamps.
+                  </li>
+                  <li>
+                    <strong>Visa & Entry Documents:</strong> You are responsible
+                    for obtaining the correct visa or entry documentation
+                    required for your travel destination. Boarding may be denied
+                    without proper documents.
+                  </li>
+                </ol>
+              </td>
+            </tr>
+
+            <!-- Contact Information -->
+            <tr>
+              <td class="contact-info">
+                <p>
+                  <strong
+                    >Have a Pleasant Trip. Borderless Travels wishes you a
+                    smooth and enjoyable journey.</strong
+                  >
+                </p>
+                <p>
+                  <strong>Travel safe and thank you for choosing us!</strong>
+                </p>
+                <br />
+                <p>
+                  At <span class="highlight">Borderless Travels</span>, you're
+                  always at the heart of everything we do. Your satisfaction is
+                  our top priority. If you experience any issues or need
+                  assistance at any point, please don't hesitate to reach out to
+                  our customer support team. You can call us on
+                  <a href="tel:0201 330 3328" class="highlight"
+                    >0201 330 3328</a
+                  >
+                  or email
+                  <a href="mailto:support@borderless.travel" class="highlight"
+                    >support@borderless.travel</a
+                  >
+                </p>
+              </td>
+            </tr>
+
+            <!-- Page Number 2 -->
+            <tr>
+              <td class="page-number">2</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
